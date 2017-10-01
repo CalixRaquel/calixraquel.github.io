@@ -1,13 +1,146 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>A Random Link</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Steam Clicker</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
-<body style="background-color:#FFFFFF;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">.
-	<h1>Welcome To My Test Site</h1>
-	<marquee>Welcome</marquee>
-<!-- Save for Web Slices (Untitled-7) -->
-<img src="images/layout.jpg" width="745" height="600" alt="">
-<!-- End Save for Web Slices -->
+<body background="Steam.jpg">
+<div style=margin-top:225px>
+<div style=margin-left:775px>
+<div ng-app="SteamClicker">
+<div ng-controller="GameController">
+
+<img src="steam-logo-001.png" ng-click="buttonclick ()"></img>
+<div style=margin-left:110px>
+<h1> <font color="red">Games : {{gameamount | number: 0}} </font> </h1>
+</div>
+<h2> <font color="red"> Store:</h2>
+
+      <button id="automatedClicker"
+              ng-click="BuyAutomatedClicker()"
+              ng-disabled="AutomatedClickerCost > gameamount">Buy Automated Clicker - {{AutomatedClickerCost}}</button>
+      
+      <button id="SteamStore"
+              ng-click="BuySteamGames()"
+              ng-disabled="SteamStoreCost > gameamount">Buy Steam Games - {{SteamStoreCost}}</button>
+  
+   <button id="FreeWeekend"
+              ng-click="BuyFreeWeekend()"
+              ng-disabled="FreeweekendCost > gameamount">Buy FreeWeekend - {{FreeweekendCost}}</button>
+  
+   <button id="SteamUpdate"
+              ng-click="BuySteamUpdate()"
+              ng-disabled="SteamUpdateCost > gameamount">Buy Steam Update - {{SteamUpdateCost}}</button>
+  
+   <button id="PocketMoney"
+              ng-click="BuyPocketMoney()"
+              ng-disabled="PocketMoneyCost > gameamount">Buy Pocket Money- {{PocketMoneyCost}}</button>
+  
+   <button id="SteamSummerSale"
+              ng-click="BuySteamSummerSale()"
+              ng-disabled="SteamSummerSaleCost > gameamount">Buy Summer Sale - {{SteamSummerSaleCost}}</button>
+  
+   <button id="Mortgage"
+              ng-click="BuyMortgage()"
+              ng-disabled="MortgageCost > gameamount">Buy Mortgage - {{MortgageCost}}</button>
+  
+   <button id="ChristmasSale"
+              ng-click="BuyChristmasSale()"
+              ng-disabled="ChristmasSaleCost > gameamount">Buy Christmas Sale - {{ChristmasSaleCost}}</button>
+</div>
+</div>
+<script>
+var app = angular.module('SteamClicker' , []);
+app.controller('GameController', function($scope, $interval) {
+
+$scope.gameamount=0;
+    $scope.numautomatedClicker = 0;
+    $scope.numSteamStore = 0;
+$scope.numFreeweekend = 0;
+$scope.numSteamUpdate = 0;
+$scope.numPocketMoney = 0;
+$scope.numSteamSummerSale = 0;
+$scope.numMortgage = 0;
+$scope.numChristmasSale = 0;
+    $scope.AutomatedClickerCost = 10;
+    $scope.SteamStoreCost= 25;
+$scope.FreeweekendCost = 50;
+$scope.SteamUpdateCost = 150;
+$scope.PocketMoneyCost = 500
+$scope.SteamSummerSaleCost = 1000;
+$scope.MortgageCost = 5000;
+$scope.ChristmasSaleCost = 10000;
+
+$scope.buttonclick = function () {
+$scope.gameamount++;
+}
+$scope.BuyAutomatedClicker = function() {
+$scope.numautomatedClicker++;
+$scope.gameamount -= $scope.AutomatedClickerCost;
+$scope.AutomatedClickerCost = Math.ceil($scope.AutomatedClickerCost * 1.1);
+  }
+ $scope.BuySteamGames = function() {
+        $scope.numSteamStore++;
+        $scope.gameamount -= $scope.SteamStoreCost;
+        $scope.SteamStoreCost = Math.ceil($scope.SteamStoreCost * 1.1);
+  }
+  
+   $scope.BuyFreeWeekend = function() {
+        $scope.numFreeweekend++;
+        $scope.gameamount -= $scope.FreeweekendCost;
+        $scope.FreeweekendCost = Math.ceil($scope.FreeweekendCost * 1.1);
+  }
+  
+   $scope.BuySteamUpdate = function() {
+        $scope.numSteamUpdate++;
+        $scope.gameamount -= $scope.SteamUpdateCost;
+        $scope.SteamUpdateCost = Math.ceil($scope.SteamUpdateCost * 1.1);
+  }
+  
+   $scope.BuyPocketMoney = function() {
+        $scope.numPocketMoney++;
+        $scope.gameamount -= $scope.PocketMoneyCost;
+        $scope.PocketMoneyCost = Math.ceil($scope.PocketMoneyCost * 1.1);
+  }
+  
+   $scope.BuySteamSummerSale = function() {
+        $scope.numSteamSummerSale++;
+        $scope.gameamount -= $scope.SteamSummerSaleCost;
+        $scope.SteamSummerSaleCost = Math.ceil($scope.SteamSummerSaleCost * 1.1);
+  }
+  
+   $scope.BuyMortgage = function() {
+        $scope.numMortgage++;
+        $scope.gameamount -= $scope.MortgageCost;
+        $scope.MortgageCost = Math.ceil($scope.MortgageCost * 1.1);
+  }
+  
+   $scope.BuyChristmasSale = function() {
+        $scope.numChristmasSale++;
+        $scope.gameamount -= $scope.ChristmasSaleCost;
+        $scope.ChristmasSaleCost = Math.ceil($scope.ChristmasSaleCost * 1.1);
+  }
+  
+  $interval(function() {
+  
+          $scope.gameamount += ($scope.numautomatedClicker * 1 / 100);
+
+        $scope.gameamount += ($scope.numSteamStore * 5 / 100);
+$scope.gameamount += ($scope.numFreeweekend * 10 / 100);
+ 
+  $scope.gameamount += ($scope.numSteamUpdate * 20 / 100);
+  
+   $scope.gameamount += ($scope.numPocketMoney * 25 / 100);
+   
+    $scope.gameamount += ($scope.numSteamSummerSale * 30 / 100);
+$scope.gameamount += ($scope.numMortgage * 35 / 100);
+ 
+  $scope.gameamount += ($scope.numChristmasSale * 50 / 100);
+    }, 40);
+  
+ 
+});
+</script>
 </body>
+</html>
